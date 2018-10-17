@@ -265,7 +265,7 @@ Format: <code>status</code></p>
 <h3 id="changing-status-of-item-code-changestatus-code"><a class="link" href="#changing-status-of-item-code-changestatus-code">3.8. Changing status of item: <code>changeStatus</code></a></h3>
 <div class="paragraph">
 <p>The status of the items can be changed<br>
-Format: <code>changeStatus n/NAME q/QUANTITY s/status</code></p>
+Format: <code>changeStatus INDEX q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -273,8 +273,8 @@ Format: <code>changeStatus n/NAME q/QUANTITY s/status</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>changeStatus n/Arduino q/20 s/faulty</code><br>
-The status of 20 arduinos would be changed to faulty</p>
+<p><code>changeStatus 1 q/20 os/Ready ns/Faulty</code><br>
+The status of 20 arduinos would be changed from Ready to faulty</p>
 </li>
 </ul>
 </div>
@@ -504,4 +504,4 @@ e.g. <code>update n/Arduino q/25 t/Lab7 t/Lab8</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 06:15:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 08:13:21 UTC</div></div></div></body></html>
