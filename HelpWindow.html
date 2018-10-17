@@ -14,21 +14,22 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-an-item-code-add-code">3.2. Adding an item: <code>add</code></a></li>
-<li><a href="#updating-an-item-code-update-code">3.3. Updating an item : <code>update</code></a></li>
-<li><a href="#deleting-an-item-code-delete-code">3.4. Deleting an item : <code>delete</code></a></li>
-<li><a href="#listing-all-items-code-all-code">3.5. Listing all items : <code>all</code></a></li>
-<li><a href="#locating-items-by-name-code-find-code">3.6. Locating items by name: <code>find</code></a></li>
-<li><a href="#listing-item-status-code-status-code">3.7. Listing item status: <code>status</code></a></li>
-<li><a href="#changing-status-of-item-code-changestatus-code">3.8. Changing status of item: <code>changeStatus</code></a></li>
-<li><a href="#creating-a-loan-list-code-loanlist-code">3.9. Creating a loan list: <code>loanList</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.10. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.11. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.12. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#save-current-version-of-stock-list-code-save-code">3.13. Save current version of stock list : <code>save</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.15. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.16. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></li>
+<li><a href="#adding-an-item-code-add-code">3.3. Adding an item: <code>add</code></a></li>
+<li><a href="#updating-an-item-code-update-code">3.4. Updating an item : <code>update</code></a></li>
+<li><a href="#deleting-an-item-code-delete-code">3.5. Deleting an item : <code>delete</code></a></li>
+<li><a href="#listing-all-items-code-all-code">3.6. Listing all items : <code>all</code></a></li>
+<li><a href="#locating-items-by-name-code-find-code">3.7. Locating items by name: <code>find</code></a></li>
+<li><a href="#listing-item-status-code-status-code">3.8. Listing item status: <code>status</code></a></li>
+<li><a href="#changing-status-of-item-code-changestatus-code">3.9. Changing status of item: <code>changeStatus</code></a></li>
+<li><a href="#creating-a-loan-list-code-loanlist-code">3.10. Creating a loan list: <code>loanList</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#save-current-version-of-stock-list-code-save-code">3.14. Save current version of stock list : <code>save</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.16. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -64,6 +65,17 @@
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
+</div>
+</li>
+<li>
+<p>You should log into this app via the <strong><code>login</code></strong> command before you start to use it.<br>
+Example of how to log in:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>login</code></strong><code>u/jalil p/dontworrybrother</code></p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -129,7 +141,27 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-item-code-add-code"><a class="link" href="#adding-an-item-code-add-code">3.2. Adding an item: <code>add</code></a></h3>
+<h3 id="logging-in-code-login-code"><a class="link" href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></h3>
+<div class="paragraph">
+<p>Log into Stock List.<br>
+Format: <code>login u/USERNAME p/PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>login u/jalil p/dontworrybrother</code></p>
+</li>
+<li>
+<p><code>login u/kinwhye p/cap1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-an-item-code-add-code"><a class="link" href="#adding-an-item-code-add-code">3.3. Adding an item: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds an item to the stock list<br>
 Format: <code>add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]</code></p>
@@ -146,7 +178,7 @@ Format: <code>add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-an-item-code-update-code"><a class="link" href="#updating-an-item-code-update-code">3.3. Updating an item : <code>update</code></a></h3>
+<h3 id="updating-an-item-code-update-code"><a class="link" href="#updating-an-item-code-update-code">3.4. Updating an item : <code>update</code></a></h3>
 <div class="paragraph">
 <p>Updates an existing item in the stock list<br>
 Format: <code>update n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]</code></p>
@@ -187,7 +219,7 @@ Edits the quantity and tags of the Arduino item to be <code>25</code> and <code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-item-code-delete-code"><a class="link" href="#deleting-an-item-code-delete-code">3.4. Deleting an item : <code>delete</code></a></h3>
+<h3 id="deleting-an-item-code-delete-code"><a class="link" href="#deleting-an-item-code-delete-code">3.5. Deleting an item : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes an item from the stock list<br>
 Format: <code>delete n/NAME q/QUANTITY</code>
@@ -203,14 +235,14 @@ Deletes 20 Arduinos</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-items-code-all-code"><a class="link" href="#listing-all-items-code-all-code">3.5. Listing all items : <code>all</code></a></h3>
+<h3 id="listing-all-items-code-all-code"><a class="link" href="#listing-all-items-code-all-code">3.6. Listing all items : <code>all</code></a></h3>
 <div class="paragraph">
 <p>Shows all items in the stock list<br>
 Format: <code>all</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-items-by-name-code-find-code"><a class="link" href="#locating-items-by-name-code-find-code">3.6. Locating items by name: <code>find</code></a></h3>
+<h3 id="locating-items-by-name-code-find-code"><a class="link" href="#locating-items-by-name-code-find-code">3.7. Locating items by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds items whose names contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -255,14 +287,14 @@ Returns any items having names <code>Arduino</code> or <code>Pi</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-item-status-code-status-code"><a class="link" href="#listing-item-status-code-status-code">3.7. Listing item status: <code>status</code></a></h3>
+<h3 id="listing-item-status-code-status-code"><a class="link" href="#listing-item-status-code-status-code">3.8. Listing item status: <code>status</code></a></h3>
 <div class="paragraph">
 <p>Shows the number of every item in each status category (Free, loan, faulty)<br>
 Format: <code>status</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-status-of-item-code-changestatus-code"><a class="link" href="#changing-status-of-item-code-changestatus-code">3.8. Changing status of item: <code>changeStatus</code></a></h3>
+<h3 id="changing-status-of-item-code-changestatus-code"><a class="link" href="#changing-status-of-item-code-changestatus-code">3.9. Changing status of item: <code>changeStatus</code></a></h3>
 <div class="paragraph">
 <p>The status of the items can be changed<br>
 Format: <code>changeStatus INDEX q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS</code></p>
@@ -280,7 +312,7 @@ The status of 20 arduinos would be changed from Ready to faulty</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-a-loan-list-code-loanlist-code"><a class="link" href="#creating-a-loan-list-code-loanlist-code">3.9. Creating a loan list: <code>loanList</code></a></h3>
+<h3 id="creating-a-loan-list-code-loanlist-code"><a class="link" href="#creating-a-loan-list-code-loanlist-code">3.10. Creating a loan list: <code>loanList</code></a></h3>
 <div class="paragraph">
 <p>A loan list can be created whenever a list of items loaned out needs to be kept tracked on<br>
 Format: <code>loanList n/NAME q/QUANTITY l/LOANER</code>
@@ -296,7 +328,7 @@ This would update the status of the 20 arduinos to loan</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.10. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -317,7 +349,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.11. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -362,7 +394,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.12. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -394,7 +426,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="save-current-version-of-stock-list-code-save-code"><a class="link" href="#save-current-version-of-stock-list-code-save-code">3.13. Save current version of stock list : <code>save</code></a></h3>
+<h3 id="save-current-version-of-stock-list-code-save-code"><a class="link" href="#save-current-version-of-stock-list-code-save-code">3.14. Save current version of stock list : <code>save</code></a></h3>
 <div class="paragraph">
 <p>An xml file recording current stocks will be created and named.<br>
 Format: <code>save NAME</code></p>
@@ -413,21 +445,21 @@ This would save the stock list at the time when the command is inputted, and the
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.15. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.16. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.16. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -486,6 +518,10 @@ e.g. <code>list t/Lab5</code></p>
 e.g. <code>loanList n/Arduino q/20 l/KinWhye</code></p>
 </li>
 <li>
+<p><strong>Login</strong> : <code>login u/USERNAME p/PASSWORD</code><br>
+e.g. <code>login u/jalil p/dontworrybrother</code></p>
+</li>
+<li>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
@@ -504,4 +540,4 @@ e.g. <code>update n/Arduino q/25 t/Lab7 t/Lab8</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 08:13:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 13:37:05 UTC</div></div></div></body></html>
