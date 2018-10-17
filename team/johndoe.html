@@ -305,13 +305,13 @@ Additionally, it implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedStockList#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedStockList#commit()</code>&#8201;&#8212;&#8201;Saves the current stock list state in its history.</p>
 </li>
 <li>
-<p><code>VersionedStockList#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedStockList#undo()</code>&#8201;&#8212;&#8201;Restores the previous stock list state from its history.</p>
 </li>
 <li>
-<p><code>VersionedStockList#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedStockList#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone stock list state from its history.</p>
 </li>
 </ul>
 </div>
@@ -322,7 +322,7 @@ Additionally, it implements the following operations:</p>
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedStockList</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedStockList</code> will be initialized with the initial stock list state, and the <code>currentStatePointer</code> pointing to that single stock list state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -330,7 +330,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th item in the address book. The <code>delete</code> command calls <code>Model#commitStockList()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>stockListStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th item in the stock list. The <code>delete</code> command calls <code>Model#commitStockList()</code>, causing the modified state of the stock list after the <code>delete 5</code> command executes to be saved in the <code>stockListStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted stock list state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -338,7 +338,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new item. The <code>add</code> command also calls <code>Model#commitStockList()</code>, causing another modified address book state to be saved into the <code>stockListStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new item. The <code>add</code> command also calls <code>Model#commitStockList()</code>, causing another modified stock list state to be saved into the <code>stockListStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -352,13 +352,13 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitStockList()</code>, so the address book state will not be saved into the <code>stockListStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitStockList()</code>, so the stock list state will not be saved into the <code>stockListStateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the item was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoStockList()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the item was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoStockList()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous stock list state, and restores the stock list to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -372,7 +372,7 @@ If a command fails its execution, it will not call <code>Model#commitStockList()
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoStockList()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial stock list state, then there are no previous stock list states to restore. The <code>undo</code> command uses <code>Model#canUndoStockList()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 </td>
 </tr>
 </table>
@@ -386,7 +386,7 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoStockList()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoStockList()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the stock list to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -395,13 +395,13 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>stockListStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoStockList()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>stockListStateList.size() - 1</code>, pointing to the latest stock list state, then there are no undone stock list states to restore. The <code>redo</code> command uses <code>Model#canRedoStockList()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitStockList()</code>, <code>Model#undoStockList()</code> or <code>Model#redoStockList()</code>. Thus, the <code>stockListStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the stock list, such as <code>list</code>, will usually not call <code>Model#commitStockList()</code>, <code>Model#undoStockList()</code> or <code>Model#redoStockList()</code>. Thus, the <code>stockListStateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -409,7 +409,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitStockList()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>stockListStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitStockList()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>stockListStateList</code>, all stock list states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -432,7 +432,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire stock list.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -465,7 +465,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of stock list states.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -511,4 +511,4 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 15:34:34 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 16:16:17 UTC</div></div></div></body></html>
