@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">JalilEnterprise</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T12-3/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>JalilEnterprises - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team T12-3</code>      Since: <code>Sep 2018</code>      Licence: <code>NUS</code></p>
+<p>By: <code>Team T12-3</code>      Since: <code>Sep 2018</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -22,13 +22,13 @@
 <li><a href="#locating-items-by-name-code-find-code">3.7. Locating items by name: <code>find</code></a></li>
 <li><a href="#listing-item-status-code-status-code">3.8. Listing item status: <code>status</code></a></li>
 <li><a href="#changing-status-of-item-code-changestatus-code">3.9. Changing status of item: <code>changeStatus</code></a></li>
-<li><a href="#creating-a-loan-list-code-loanlist-code">3.10. Creating a loan list: <code>loanList</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#lost-an-item-code-lost-code">3.13. Lost an item: <code>lost</code></a></li>
-<li><a href="#found-an-item-code-found-code">3.14. Found an item: <code>found</code></a></li>
-<li><a href="#listing-lost-found-list-code-lost-found-code">3.15. Listing Lost&amp;Found List: <code>lost&amp;found</code></a></li>
-<li><a href="#listing-items-under-a-specific-tag-code-tag-code">3.16. Listing items under a specific tag: <code>tag</code></a></li>
+<li><a href="#listing-items-under-a-specific-tag-code-tag-code">3.10. Listing items under a specific tag: <code>tag</code></a></li>
+<li><a href="#creating-a-loan-list-code-loanlist-code">3.11. Creating a loan list: <code>loanList</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#lost-an-item-code-lost-code">3.14. Lost an item: <code>lost</code></a></li>
+<li><a href="#found-an-item-code-found-code">3.15. Found an item: <code>found</code></a></li>
+<li><a href="#listing-lost-found-list-code-lost-found-code">3.16. Listing Lost&amp;Found List: <code>lost&amp;found</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.17. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#save-current-version-of-stock-list-code-save-code">3.18. Save current version of stock list : <code>save</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
@@ -316,7 +316,25 @@ The status of 20 arduinos would be changed from Ready to faulty</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-a-loan-list-code-loanlist-code"><a class="link" href="#creating-a-loan-list-code-loanlist-code">3.10. Creating a loan list: <code>loanList</code></a></h3>
+<h3 id="listing-items-under-a-specific-tag-code-tag-code"><a class="link" href="#listing-items-under-a-specific-tag-code-tag-code">3.10. Listing items under a specific tag: <code>tag</code></a></h3>
+<div class="paragraph">
+<p>Finds and lists items whose tags contain any of the given keywords. This command is case insensitive<br>
+Format: `tag KEYWORD [MORE_KEYWORDS]</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tag Lab1</code><br>
+Returns the items whose tags includes "Lab1"</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-a-loan-list-code-loanlist-code"><a class="link" href="#creating-a-loan-list-code-loanlist-code">3.11. Creating a loan list: <code>loanList</code></a></h3>
 <div class="paragraph">
 <p>A loan list can be created whenever a list of items loaned out needs to be kept tracked on<br>
 Format: <code>loanList n/NAME q/QUANTITY l/LOANER</code>
@@ -332,7 +350,7 @@ This would update the status of the 20 arduinos to loan</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -353,7 +371,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -398,7 +416,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="lost-an-item-code-lost-code"><a class="link" href="#lost-an-item-code-lost-code">3.13. Lost an item: <code>lost</code></a></h3>
+<h3 id="lost-an-item-code-lost-code"><a class="link" href="#lost-an-item-code-lost-code">3.14. Lost an item: <code>lost</code></a></h3>
 <div class="paragraph">
 <p>Lost an item From the stock list<br>
 Format: <code>lost n/NAME [q/QUANTITY]</code></p>
@@ -415,7 +433,7 @@ Format: <code>lost n/NAME [q/QUANTITY]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="found-an-item-code-found-code"><a class="link" href="#found-an-item-code-found-code">3.14. Found an item: <code>found</code></a></h3>
+<h3 id="found-an-item-code-found-code"><a class="link" href="#found-an-item-code-found-code">3.15. Found an item: <code>found</code></a></h3>
 <div class="paragraph">
 <p>Found an item From the Lost&amp;Found List<br>
 Format: <code>found n/NAME [q/QUANTITY]</code></p>
@@ -432,28 +450,10 @@ Format: <code>found n/NAME [q/QUANTITY]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-lost-found-list-code-lost-found-code"><a class="link" href="#listing-lost-found-list-code-lost-found-code">3.15. Listing Lost&amp;Found List: <code>lost&amp;found</code></a></h3>
+<h3 id="listing-lost-found-list-code-lost-found-code"><a class="link" href="#listing-lost-found-list-code-lost-found-code">3.16. Listing Lost&amp;Found List: <code>lost&amp;found</code></a></h3>
 <div class="paragraph">
 <p>Shows the number of every item that has been lost<br>
 Format: <code>lost&amp;found</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-items-under-a-specific-tag-code-tag-code"><a class="link" href="#listing-items-under-a-specific-tag-code-tag-code">3.16. Listing items under a specific tag: <code>tag</code></a></h3>
-<div class="paragraph">
-<p>Finds and lists items whose tags contain any of the given keywords<br>
-Format: `tag KEYWORD [MORE_KEYWORDS]</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>tag Lab1</code><br>
-Returns the items with tag "Lab1"</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect2">
@@ -618,4 +618,4 @@ e.g. <code>tag Lab1</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-22 18:54:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 06:22:05 UTC</div></div></div></body></html>
