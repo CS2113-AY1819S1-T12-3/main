@@ -423,7 +423,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <h3 id="lost-an-item-code-lost-code"><a class="link" href="#lost-an-item-code-lost-code">3.14. Lost an item: <code>lost</code></a></h3>
 <div class="paragraph">
 <p>Lost an item From the stock list<br>
-Format: <code>lost n/NAME [q/QUANTITY]</code></p>
+Format: <code>lost INDEX [q/QUANTITY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -431,7 +431,7 @@ Format: <code>lost n/NAME [q/QUANTITY]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>lost n/Arduino q/25</code></p>
+<p><code>lost 1 q/25</code></p>
 </li>
 </ul>
 </div>
@@ -440,7 +440,7 @@ Format: <code>lost n/NAME [q/QUANTITY]</code></p>
 <h3 id="found-an-item-code-found-code"><a class="link" href="#found-an-item-code-found-code">3.15. Found an item: <code>found</code></a></h3>
 <div class="paragraph">
 <p>Found an item From the Lost&amp;Found List<br>
-Format: <code>found n/NAME [q/QUANTITY]</code></p>
+Format: <code>found INDEX [q/QUANTITY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -448,7 +448,7 @@ Format: <code>found n/NAME [q/QUANTITY]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>found n/Arduino q/25</code></p>
+<p><code>found index q/25</code></p>
 </li>
 </ul>
 </div>
@@ -602,12 +602,12 @@ e.g. <code>login u/jalil p/dontworrybrother</code></p>
 e.g. <code>update 1 n/Arduino q/25 t/Lab7 t/Lab8</code></p>
 </li>
 <li>
-<p><strong>Lost</strong> : <code>lost n/NAME [q/QUANTITY]</code><br>
-e.g. <code>lost n/Arduino q/25</code></p>
+<p><strong>Lost</strong> : <code>lost INDEX [q/QUANTITY]</code><br>
+e.g. <code>lost 1 q/25</code></p>
 </li>
 <li>
-<p><strong>Found</strong> : <code>found n/NAME [q/QUANTITY]</code><br>
-e.g. <code>found n/Arduino q/25</code></p>
+<p><strong>Found</strong> : <code>found INDEX [q/QUANTITY]</code><br>
+e.g. <code>found 1 q/25</code></p>
 </li>
 <li>
 <p><strong>Lost&amp;Found List</strong> : <code>lost&amp;found</code></p>
@@ -622,4 +622,4 @@ e.g. <code>tag Lab1</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 12:05:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-28 16:42:18 UTC</div></div></div></body></html>
