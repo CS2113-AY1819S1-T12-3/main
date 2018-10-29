@@ -33,11 +33,12 @@
 <li><a href="#savecommand-feature">3.2. SaveCommand feature</a></li>
 <li><a href="#change-status-command">3.3. Change Status command</a></li>
 <li><a href="#login-feature">3.4. Login feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#tag-feature">3.6. Tag feature</a></li>
-<li><a href="#lost-and-found-feature">3.7. Lost and Found feature</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#tag-feature">3.5. Tag feature</a></li>
+<li><a href="#addtag-feature">3.6. AddTag feature</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
+<li><a href="#lost-and-found-feature">3.8. Lost and Found feature</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -952,15 +953,9 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="tag-feature"><a class="link" href="#tag-feature">3.6. Tag feature</a></h3>
+<h3 id="tag-feature"><a class="link" href="#tag-feature">3.5. Tag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Tag feature is facilitated by <code>TagCommand</code>.
 It extends <code>Command</code> and implements the following operations:</p>
@@ -968,10 +963,7 @@ It extends <code>Command</code> and implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>TagCommand#tag()</code>&#8201;&#8212;&#8201;Finds and shows all items under a specific tag.</p>
-</li>
-<li>
-<p><code>TagCommand#append()</code>&#8201;&#8212;&#8201; Append a new tag to all the items in the Stock List.</p>
+<p><code>TagCommand()</code>&#8201;&#8212;&#8201;Finds and shows all items under specific tags.</p>
 </li>
 </ul>
 </div>
@@ -979,52 +971,40 @@ It extends <code>Command</code> and implements the following operations:</p>
 <p>Given below is an example usage scenario and how the tag mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Scenario 1.</p>
-</div>
-<div class="paragraph">
 <p>Step 1. The user executes <code>tag Lab1</code> command to list all items with the tag <code>Lab1</code></p>
 </div>
 <div class="paragraph">
 <p>Step 2. The <code>tag</code> command calls <code>updateFilteredItemListByTag()</code>, which shows the search result to the user.</p>
 </div>
-<div class="paragraph">
-<p>Scenario 2.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user executes <code>tag append Lab3</code> command to append a tag <code>Lab3</code> to all the items in the Stock List.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The 'tag append' command calls <code>EditCommand</code> to all the items in the stock list.</p>
-</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-tag-append-executes"><a class="link" href="#aspect-how-tag-append-executes">Aspect: How tag append executes</a></h5>
+<h5 id="aspect-how-tagcommand-executes"><a class="link" href="#aspect-how-tagcommand-executes">Aspect: How tagCommand executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Append tag to all items in the stock list.</p>
+<p><strong>Alternative 1 (current choice):</strong> When multiple tags are used for search, the search result will be <code>all the items</code> contains at least one tag.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage and may not be useful in real-life usage.</p>
+<p>Cons: May be difficult for the user to tell which item contains one tag and which items contain the other tag.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Append tag to some of the items, by index</p>
+<p><strong>Alternative 2:</strong> Group the search result by different tags inputted.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory and will be useful in real-life scenario</p>
+<p>Pros: Will be useful in real-life scenario</p>
 </li>
 <li>
-<p>Cons: It is harder to implement and harder to use.</p>
+<p>Cons: It is harder to implement and takes up more screen space to show the results.</p>
 </li>
 </ul>
 </div>
@@ -1035,13 +1015,81 @@ It extends <code>Command</code> and implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="lost-and-found-feature"><a class="link" href="#lost-and-found-feature">3.7. Lost and Found feature</a></h3>
+<h3 id="addtag-feature"><a class="link" href="#addtag-feature">3.6. AddTag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Tag feature is facilitated by <code>AddTagCommand</code>.
+It extends <code>Command</code> and implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddTagCommand()</code>&#8201;&#8212;&#8201; Add new tags to a select item in the Stock List.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the addTag mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user executes <code>addTag 1 t/ Lab2</code> command to add a tag <code>Lab2</code> to the item with index 2 in the Stock List.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The 'addTag' command calls <code>updateFilteredItemList();</code> in <code>model</code> show the stock list after the tag is added.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-add-tag-executes"><a class="link" href="#aspect-how-add-tag-executes">Aspect: How add tag executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Add tags to one item in the stock list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May be complicated when the user want to add same tags to multiple items.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Add tag to multiple items in the stock list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will be more user friendly when same tags need to be added to multiple items.</p>
+</li>
+<li>
+<p>Cons: It is harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
+<div class="paragraph">
+<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lost-and-found-feature"><a class="link" href="#lost-and-found-feature">3.8. Lost and Found feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.1. Current Implementation</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-lost-and-found-executes"><a class="link" href="#aspect-how-lost-and-found-executes">Aspect: How Lost and Found executes</a></h5>
 <div class="ulist">
@@ -1078,14 +1126,14 @@ It extends <code>Command</code> and implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1116,7 +1164,7 @@ It extends <code>Command</code> and implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2654,4 +2702,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-28 16:42:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 04:45:28 UTC</div></div></div></body></html>
