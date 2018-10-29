@@ -1083,7 +1083,62 @@ It extends <code>Command</code> and implements the following operations:</p>
 <h3 id="lost-and-found-feature"><a class="link" href="#lost-and-found-feature">3.8. Lost and Found feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.1. Current Implementation</a></h4>
-
+<div class="paragraph">
+<p>The Lost and Found mechanism is facilitated by <code>LostCommand</code> and <code>FoundCommand</code>. These two commands extend <code>Command</code>. And two class: LostDescriptor and Found Descriptor are created as well. The 2 commands implement the following operations:
+* <code>LostCommand#lost()</code>&#8201;&#8212;&#8201;Lost an item with its number from the Stock List.
+* <code>FoundCommand#found()</code>&#8201;&#8212;&#8201; Found a number of lost items from the Stock List.</p>
+</div>
+<div class="paragraph">
+<p>Given below are example usage scenarios and how the Lost and Found mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Scenario 1：</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user executes <code>lost 1 q/20</code> command to indicate 20 Arduinos are lost from the Stock List.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The <code>LostDescriptor</code> consists of the lost quantity of the item.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The <code>lost</code> command firstly calls <code>getFilteredItemList()</code> to get the item of the given index and its original quantity.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. Then <code>LostDescriptor</code> will be called and the lost quantity of the item will be returned.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. By using the original quantity of the item minus the lost quantity, the updated quantity of the item will be got.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. A copy is created and the change of the quantity is made to the copy. The copy then replaces the original item.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.</p>
+</div>
+<div class="paragraph">
+<p>Scenario 2：</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user executes <code>found 1 q/20</code> command to indicate 20 lost Arduinos from the Stock List are found.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The <code>FoundDescriptor</code> consists of the found quantity of the item.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The <code>found</code> command firstly calls <code>getFilteredItemList()</code> to get the item of the given index and its original quantity.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. Then <code>FoundDescriptor</code> will be called and the found quantity of the item will be returned.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. By using the original quantity of the item adds the found quantity, the updated quantity of the item will be got.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. A copy is created and the change of the quantity is made to the copy. The copy then replaces the original item.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The updated item list and success message is shown to the user. Updates are committed to the storage.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
@@ -1092,20 +1147,7 @@ It extends <code>Command</code> and implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong> (current choice) Create a lost&amp;found list to record the lost&amp;found history.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Able to list all the lost&amp;found records and history.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2</strong> Just do the same way as Change Status to change the quantity of the item in the StockList.</p>
+<p><strong>Alternative 1</strong> (current choice) When executing lost or found command, update the quantity of the item in the StockList.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1113,6 +1155,19 @@ It extends <code>Command</code> and implements the following operations:</p>
 </li>
 <li>
 <p>Cons: Unable to list all the lost and found history.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong> Create a lost&amp;found list to record the lost&amp;found history.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to list all the lost&amp;found records and history.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of usage.</p>
 </li>
 </ul>
 </div>
@@ -2699,4 +2754,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 05:40:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 05:51:47 UTC</div></div></div></body></html>
