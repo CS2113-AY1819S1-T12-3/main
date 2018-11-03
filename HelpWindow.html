@@ -102,10 +102,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all items</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/Arduino q/20 m/5 t/Lab1 t/Lab2</code> : adds 20 <code>Arduino</code> item to the StockList, with a minimum quantity of 5 and tags <code>Lab1</code> and <code>Lab2</code>.</p>
+<p><strong><code>add</code></strong><code>n/Arduino q/20 m/5 t/Lab1 t/Lab2</code> : adds 20 <code>Arduino</code> item to the StockList, with a minimum quantity of 5 and tags <code>Lab1</code> and <code>Lab2</code></p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>1 q/20</code> : decreases the quantity of the <code>1st item by 20</code>.</p>
+<p><strong><code>delete</code></strong><code>1</code> : deletes the item with index 1</p>
 </li>
 <li>
 <p><strong><code>status</code></strong> : Shows the number of every item in each status category (Ready, On_Loan, Faulty)</p>
@@ -212,7 +212,7 @@ Format: <code>add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]</code></p>
 <h3 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">3.4. Editing an item : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing item in the stock list<br>
-Format: <code>edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]</code></p>
+Format: <code>edit INDEX [n/NAME] [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -222,7 +222,7 @@ Format: <code>edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]</code>
 <p>Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​</p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
+<p>At least one of the fields (name, quantity, minimum quantity or tag) must be provided.</p>
 </li>
 <li>
 <p>Existing values will be updated to the input values.</p>
@@ -262,7 +262,7 @@ Format: `delete INDEX</p>
 <ul>
 <li>
 <p><code>delete 1</code><br>
-Delete the item with index 1</p>
+Deletes the item with index 1</p>
 </li>
 </ul>
 </div>
@@ -415,8 +415,25 @@ The first entry as shown on the viewLoanList command will be deleted. The status
 <div class="sect2">
 <h3 id="listing-items-under-specific-tags-code-tag-code"><a class="link" href="#listing-items-under-specific-tags-code-tag-code">3.15. Listing items under specific tags: <code>tag</code></a></h3>
 <div class="paragraph">
-<p>Finds and lists items whose tags contain any of the given keywords. This command is case insensitive<br>
+<p>Finds and lists items whose tags contain any of the given keywords.<br>
 Format: `tag KEYWORD [MORE_KEYWORDS]</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>lab1</code> will match <code>Lab 1</code></p>
+</li>
+<li>
+<p>Only the tag is searched.</p>
+</li>
+<li>
+<p>Partial words are recognized. e.g. <code>Lab</code> will match <code>Lab1</code></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -775,4 +792,4 @@ e.g. <code>open forAugust</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 07:01:37 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 10:52:38 UTC</div></div></div></body></html>
