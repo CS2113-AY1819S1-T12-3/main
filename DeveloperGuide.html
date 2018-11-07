@@ -30,7 +30,7 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#savecommand-feature">3.2. SaveCommand feature</a></li>
+<li><a href="#save-open-feature">3.2. Save/Open feature</a></li>
 <li><a href="#change-status-command">3.3. Change Status command</a></li>
 <li><a href="#status-command">3.4. Status command</a></li>
 <li><a href="#loanlist-command">3.5. LoanList command</a></li>
@@ -796,16 +796,19 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="savecommand-feature"><a class="link" href="#savecommand-feature">3.2. SaveCommand feature</a></h3>
+<h3 id="save-open-feature"><a class="link" href="#save-open-feature">3.2. Save/Open feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The saveStockListVersion mechanism is facilitated by <code>SaveCommand</code>. It extends <code>Command</code> and implements the following operation:</p>
+<p>The save/open mechanism is facilitated by <code>SaveCommand</code> and <code>OpenCommand</code>. It extends <code>Command</code> and implements the following operation:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>Command#SaveCommand()</code>&#8201;&#8212;&#8201;Saves the current version of the stock list as an XML file in a /versions/ folder.</p>
+</li>
+<li>
+<p><code>Command#OpenCommand()</code>&#8201;&#8212;&#8201;Opens the saved XML file as a table in the browser panel.</p>
 </li>
 </ul>
 </div>
@@ -816,7 +819,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <p>Given below is an example usage scenario and how the saveCommand mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user executes <code>save lab1</code> command to save the current version of the stock list as an xml file named <code>lab1.xml</code>.</p>
+<p>Step 1. The user executes <code>save april_18</code> command to save the current version of the stock list as an xml file named <code>april_18.xml</code>.</p>
 </div>
 <div class="paragraph">
 <p>Step 2. The <code>save</code> command calls <code>Model#saveStockList()</code>, which initiates a <code>saveStockListVersionEvent</code>. The <code>fileName</code> and <code>ReadOnlyStockList</code> are saved as public final variables in the event.</p>
@@ -827,22 +830,37 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <div class="paragraph">
 <p>Step 4. The <code>ReadOnlyStockList</code> is saved as an xml file.</p>
 </div>
+<div class="paragraph">
+<p>Step 5. The user executes <code>open april_18</code> command to open the saved april_18.xml file.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. The <code>open</code> command calls <code>Model#openStockList()</code>, which initiates a <code>openStockListVersionEvent</code>. The <code>fileName</code> is saved as a public final variable in the event.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. The <code>handleOpenStockListVersionEvent</code> handler calls the <code>loadFileAsPage()</code> method from the <code>BrowserPanel</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Step 8. The <code>loadFileAsPage()</code> method takes in the fileName and passes the directories of the <code>april_18.xml</code> and <code>template.xsl</code> files into <code>transformXml()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>Step 9. The <code>april_18.xml</code> file is transformed with the <code>template.xsl</code> stylesheet into a table format and is displayed by the browser engine on the browser panel.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-savecommand-executes"><a class="link" href="#aspect-how-savecommand-executes">Aspect: How SaveCommand executes</a></h5>
+<h5 id="aspect-how-save-executes"><a class="link" href="#aspect-how-save-executes">Aspect: How save executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong> (current choice) Save the entire stock list.</p>
+<p><strong>Alternative 1</strong> (current choice) Save as .xml file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Able to reload the particular version on the application.</p>
+<p>Pros: Able to display the inventory as a table by using XML transformation with XSLT. The .xml file can also be opened in Excel.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of usage.</p>
+<p>Cons: -</p>
 </li>
 </ul>
 </div>
@@ -852,10 +870,43 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Less memory usage</p>
+<p>Pros: File can be imported or exported.</p>
 </li>
 <li>
-<p>Cons: Unable to edit fields using the application upon creation of the .csv file.</p>
+<p>Cons: Unable to style the displayed table in the application.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-open-executes"><a class="link" href="#aspect-how-open-executes">Aspect: How open executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong> (current choice) Transform .xml file into a table with a .xsl stylesheet.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to display the inventory in a table format for ease of view.</p>
+</li>
+<li>
+<p>Cons: A template.xsl file must be included in the application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong> Open the .xml file as it is</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require transforming the .xml file with XSLT.</p>
+</li>
+<li>
+<p>Cons: The displayed inventory is in XML format and hard to decipher.</p>
 </li>
 </ul>
 </div>
@@ -2843,4 +2894,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 08:36:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 08:40:30 UTC</div></div></div></body></html>

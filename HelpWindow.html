@@ -37,10 +37,9 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.22. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.23. Listing entered commands : <code>history</code></a></li>
 <li><a href="#save-current-version-of-stock-list-code-save-code">3.24. Save current version of stock list : <code>save</code></a></li>
-<li><a href="#open-a-saved-stock-list-code-open-code">3.25. Open a saved stock list : <code>open</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.26. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.27. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.26. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -319,7 +318,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>Only the name is searched.</p>
 </li>
 <li>
-<p>Partial words will be matched e.g. <code>Arduino</code> will match <code>Arduinos</code></p>
+<p>Partial words will be matched e.g. <code>Ard</code> will match <code>Arduino</code></p>
 </li>
 <li>
 <p>Items matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Arduino Uno</code> will return <code>Arduino Mega</code>, <code>Arduino Leonardo</code></p>
@@ -636,13 +635,11 @@ Format: <code>save NAME</code></p>
 <li>
 <p><code>save ForAugust</code><br>
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
-<code>ForAugust.xml</code>, under a /versions/ folder in main.</p>
+<code>ForAugust.xml</code>, under a /versions/ folder in main.
+=== Open a saved stock list : <code>open</code></p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="open-a-saved-stock-list-code-open-code"><a class="link" href="#open-a-saved-stock-list-code-open-code">3.25. Open a saved stock list : <code>open</code></a></h3>
 <div class="paragraph">
 <p>An xml file recording current stocks will be opened.<br>
 Format: <code>open NAME</code></p>
@@ -660,21 +657,21 @@ This would open the saved stock list under /versions/ folder in main at the time
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.26. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.25. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.27. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
 <div class="paragraph">
 <p>JalilEnterprises data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -792,4 +789,4 @@ e.g. <code>open forAugust</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 08:36:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 08:40:30 UTC</div></div></div></body></html>
