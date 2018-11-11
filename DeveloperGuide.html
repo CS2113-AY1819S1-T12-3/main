@@ -31,16 +31,14 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#save-open-feature">3.2. Save/Open feature</a></li>
-<li><a href="#change-status-command">3.3. Change Status command</a></li>
-<li><a href="#status-command">3.4. Status command</a></li>
-<li><a href="#loanlist-command">3.5. LoanList command</a></li>
-<li><a href="#login-feature">3.6. Login feature</a></li>
-<li><a href="#tag-feature">3.7. Tag feature</a></li>
-<li><a href="#addtag-deletetag-feature">3.8. AddTag/DeleteTag feature</a></li>
-<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
-<li><a href="#lost-and-found-feature">3.10. Lost and Found feature</a></li>
-<li><a href="#logging">3.11. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
+<li><a href="#status-feature">3.3. Status feature</a></li>
+<li><a href="#login-feature">3.4. Login feature</a></li>
+<li><a href="#tag-feature">3.5. Tag feature</a></li>
+<li><a href="#addtag-deletetag-feature">3.6. AddTag/DeleteTag feature</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
+<li><a href="#lost-and-found-feature">3.8. Lost and Found feature</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -917,25 +915,69 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="change-status-command"><a class="link" href="#change-status-command">3.3. Change Status command</a></h3>
+<h3 id="status-feature"><a class="link" href="#status-feature">3.3. Status feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.</p>
+<p>The status feature is facilitated by the <code>Item</code> class, which contains the <code>Status</code> class.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The ChangeStatusDescriptor class consists of the itemName, quantity, originalStatus, and updatedStatus.</p>
-</li>
-<li>
-<p>The ChangeStatusCommandParser class takes in the input string from the user, parses it into the ChangeStatusDescriptor, and returns a new ChangeStatusCommand.</p>
-</li>
-<li>
-<p>For the ChangeStatusCommand class, the execute method uses the itemName to obtain the item to update from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.</p>
+<p>The status class keeps track of the quantities <code>Ready</code>, <code>OnLoan</code>, and <code>Faulty</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The updated item list and success message is shown to the user. Updates are committed to the storage.</p>
+<p>The status feature is further facilitated by the 5 commands, <code>StatusCommand</code>, <code>ChangeStatusCommand</code>, <code>LoanListCommand</code>, <code>DeleteLoanListCommand</code> and <code>ViewLoansListCommand</code>. The commands extend <code>Command</code> and implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Command#StatusCommand()</code> - Lists out the items according to their status.</p>
+</li>
+<li>
+<p><code>Command#ChangeStatusCommand()</code> - Changes the status from <code>Ready</code> to <code>Faulty</code>, or vice versa.</p>
+</li>
+<li>
+<p><code>Command#LoanListCommand()</code> - Creates and stores a loan list and changes the item status from <code>Ready</code> to <code>OnLoan</code>.</p>
+</li>
+<li>
+<p><code>Command#DeleteLoanListCommand()</code> - Deletes the loan list and changes the item status from <code>OnLoan</code> to <code>Ready</code>.</p>
+</li>
+<li>
+<p><code>Command#ViewLoanListCommand()</code> - Lists out the loan lists.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the command mechanisms behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user executes the <code>AddCommand</code> to add 50 Arduinos into the stock list.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddCommand</code> calls on the <code>Item Constructor</code> which creates the item object, and sets the status of all 50 Arduinos to <code>Ready</code> by default.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes the <code>ChangeStatusCommand</code> to change the status of 10 Arduinos from <code>Ready</code> to <code>Faulty</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>ChangeStatusCommandParser#parseCommand()</code> is called and takes in the input string from the user, parses it into the <code>ChangeStatusDescriptor</code>, and returns a new <code>ChangeStatusCommand</code>.</p>
+</li>
+<li>
+<p>The <code>ChangeStatusDescriptor</code> class consists of the <code>itemName</code>, <code>quantity</code>, <code>originalStatus</code>, and <code>updatedStatus</code>.</p>
+</li>
+<li>
+<p>The <code>ChangeStatusCommand#execute()</code> is called. This calls the <code>Model#getFilteredItemList()</code> to obtain the item to update, and calls <code>Model#updateItem()</code> to update the item inside of the stock list with the new status.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the changeStatus operation works:</p>
@@ -945,56 +987,85 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <img src="images/ChangeStatus.png" alt="ChangeStatus" width="800">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="status-command"><a class="link" href="#status-command">3.4. Status command</a></h3>
 <div class="paragraph">
-<p>For this command, 2 classes were created, SimpleItem and StatusCommand.</p>
+<p>Step 3. The user executes the <code>StatusCommand</code> to list the items by status.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.</p>
+<p>The <code>StatusCommand#execute</code> is called. This calls the <code>Model#getFilteredItemList()</code> to obtain the item list.</p>
 </li>
 <li>
-<p>For the StatusCommand class, the execute method sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.</p>
+<p>The <code>StatusCommand#sortSimpleItems()</code> iterates through the item list and sorts them according to the status.</p>
+</li>
+<li>
+<p>The sorted items are stored as <code>SimpleItem</code> objects, which stores the just <code>itemName</code> the and <code>quantity</code>, as these are the only 2 relevant fields.</p>
+</li>
+<li>
+<p>The results are shown to the user.</p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Status.png" alt="Status" width="800">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="loanlist-command"><a class="link" href="#loanlist-command">3.5. LoanList command</a></h3>
 <div class="paragraph">
-<p>For this command, 5 classes were created, LoanerDescription, LoanListParser, LoanListCommand, XmlAdaptedLoanerDescription, and XmlAdaptedLoanList.</p>
+<p>Step 4. The user executes the <code>LoanListCommand</code> to loan out 20 Arduinos to Davind.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The LoanerDescription class consists of the itemName, loanerName, and quantity.</p>
+<p>The <code>LoanListParser#parseCommand</code> is called and takes in the input string from the user, parses it into the <code>LoanerDescription</code>, and returns a new <code>LoanListCommand</code>.</p>
 </li>
 <li>
-<p>The LoanListParser class takes in the input string from the user, parses it into the LoanerDescription, and returns a new LoanListCommand.</p>
+<p>The <code>LoanerDescription</code> class consists of the <code>itemName</code>, <code>loanerName</code>, and <code>quantity</code>.</p>
 </li>
 <li>
-<p>For the LoanListCommand, the execute method calls the ChangeStatusCommand to change the status from Ready to On_Loan. A XmlAdaptedLoanerDescription object is then created from the LoanerDescription and is added into the XmlAdaptedLoanList. This is then saved inside the storage.</p>
+<p>The <code>LoanListCommand#execute()</code> is called. This creates a new <code>ChangeStatusCommand</code> and calls the <code>ChangeStatusCommand#execute()</code> to change the status from Ready to On_Loan.</p>
+</li>
+<li>
+<p>The <code>LoanListCommand#updateLoanList()</code> is called. This creates an <code>XmlAdaptedLoanerDescription</code> object and is added into the <code>XmlAdaptedLoanList</code>.</p>
+</li>
+<li>
+<p>The <code>LoanListCommand#updateXmlLoanListFile()</code> is called to save the changes in storage.</p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/LoanList.png" alt="LoanList" width="800">
+<div class="paragraph">
+<p>Step 5. The user executes the <code>ViewLoanListCommand</code> to view the loan list.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>XmlAdaptedLoanList#getLoanList()</code> is used to obtain the loan list</p>
+</li>
+<li>
+<p>The <code>ViewLoanListCommand#getMessageOutput()</code> iterates through the loan list and returns the result to the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Step 6. The user executes the <code>DeleteLoanListCommand</code> to delete the loan list when Davind returns the Arduinos.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>DeleteLoanListCommand#execute()</code> is called. This calls the <code>ChangeStatusCommand#execute()</code> to change the status from On_Loan to Ready.</p>
+</li>
+<li>
+<p>The <code>xmlAdaptedLoanList#getLoanList()</code> is called to obtain the loan list.</p>
+</li>
+<li>
+<p>The <code>ArrayList#remove()</code> is called to remove the loan list entry</p>
+</li>
+<li>
+<p>The <code>LoanListCommand#updateXmlLoanListFile()</code> is called to save the changes in storage.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-feature"><a class="link" href="#login-feature">3.6. Login feature</a></h3>
+<h3 id="login-feature"><a class="link" href="#login-feature">3.4. Login feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The login mechanism is facilitated by <code>LoginCommand</code>. It extends <code>Command</code> and implements the following operations:</p>
 </div>
@@ -1022,7 +1093,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-execute-executes"><a class="link" href="#aspect-how-execute-executes">Aspect: How 'execute' executes</a></h5>
 <div class="ulist">
@@ -1059,9 +1130,9 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect2">
-<h3 id="tag-feature"><a class="link" href="#tag-feature">3.7. Tag feature</a></h3>
+<h3 id="tag-feature"><a class="link" href="#tag-feature">3.5. Tag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Tag feature is facilitated by <code>TagCommand</code>.
 It extends <code>Command</code> and implements the following operation:</p>
@@ -1084,7 +1155,7 @@ It extends <code>Command</code> and implements the following operation:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-tagcommand-executes"><a class="link" href="#aspect-how-tagcommand-executes">Aspect: How tagCommand executes</a></h5>
 <div class="ulist">
@@ -1121,9 +1192,9 @@ It extends <code>Command</code> and implements the following operation:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="addtag-deletetag-feature"><a class="link" href="#addtag-deletetag-feature">3.8. AddTag/DeleteTag feature</a></h3>
+<h3 id="addtag-deletetag-feature"><a class="link" href="#addtag-deletetag-feature">3.6. AddTag/DeleteTag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The AddTag and DeleteTag features are facilitated by <code>AddTagCommand</code> and <code>DeleteTagCommand</code>.
 They extend <code>Command</code> and implement the following operations:</p>
@@ -1161,7 +1232,7 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1195,15 +1266,15 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="lost-and-found-feature"><a class="link" href="#lost-and-found-feature">3.10. Lost and Found feature</a></h3>
+<h3 id="lost-and-found-feature"><a class="link" href="#lost-and-found-feature">3.8. Lost and Found feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.10.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Lost and Found mechanism is facilitated by <code>LostCommand</code>, <code>FoundCommand</code> and <code>LostandFoundCommand</code>. These three commands extend <code>Command</code>. And two class: LostDescriptor and Found Descriptor are created as well. The 3 commands implement the following operations:
 * <code>LostCommand#lost()</code>&#8201;&#8212;&#8201;Lost an item with its number from the Stock List.
@@ -1281,7 +1352,7 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-lost-and-found-executes"><a class="link" href="#aspect-how-lost-and-found-executes">Aspect: How Lost and Found executes</a></h5>
 <div class="ulist">
@@ -1318,14 +1389,14 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1356,7 +1427,7 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2900,4 +2971,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 09:53:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 12:10:01 UTC</div></div></div></body></html>
