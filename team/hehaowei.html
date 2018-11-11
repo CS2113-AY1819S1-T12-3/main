@@ -16,17 +16,8 @@
 </ul>
 </li>
 <li><a href="#summary-of-contributions">2. Summary of contributions</a></li>
-<li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a>
-<ul class="sectlevel2">
-<li><a href="#save-current-version-of-stock-list-code-save-code">3.1. Save current version of stock list : <code>save</code></a></li>
-<li><a href="#open-a-saved-stock-list-code-open-code">3.2. Open a saved stock list : <code>open</code></a></li>
-</ul>
-</li>
-<li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a>
-<ul class="sectlevel2">
-<li><a href="#save-open-feature">4.1. Save/Open feature</a></li>
-</ul>
-</li>
+<li><a href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a></li>
+<li><a href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></li>
 </ul>
 </div>
 </div>
@@ -137,43 +128,6 @@ This project is completed by team T12-3 of module CS2113T in National University
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="save-current-version-of-stock-list-code-save-code"><a class="link" href="#save-current-version-of-stock-list-code-save-code">3.1. Save current version of stock list : <code>save</code></a></h3>
-<div class="paragraph">
-<p>An xml file recording current stocks will be created and named.<br>
-Format: <code>save NAME</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>save ForAugust</code><br>
-This would save the stock list at the time when the command is inputted, and the name for this xml file is
-<code>ForAugust.xml</code>, under a /versions/ folder in main.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="open-a-saved-stock-list-code-open-code"><a class="link" href="#open-a-saved-stock-list-code-open-code">3.2. Open a saved stock list : <code>open</code></a></h3>
-<div class="paragraph">
-<p>An xml file recording current stocks will be opened.<br>
-Format: <code>open NAME</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>open ForAugust</code><br>
-This would open the saved stock list under /versions/ folder in main at the time when the command is inputted</p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -189,126 +143,5 @@ This would open the saved stock list under /versions/ folder in main at the time
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="save-open-feature"><a class="link" href="#save-open-feature">4.1. Save/Open feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>The save/open mechanism is facilitated by <code>SaveCommand</code> and <code>OpenCommand</code>. It extends <code>Command</code> and implements the following operation:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Command#SaveCommand()</code>&#8201;&#8212;&#8201;Saves the current version of the stock list as an XML file in a /versions/ folder.</p>
-</li>
-<li>
-<p><code>Command#OpenCommand()</code>&#8201;&#8212;&#8201;Opens the saved XML file as a table in the browser panel.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The operation is exposed in the <code>Model</code> interface as <code>Model#saveStockList()</code>.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the saveCommand mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user executes <code>save april_18</code> command to save the current version of the stock list as an xml file named <code>april_18.xml</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The <code>save</code> command calls <code>Model#saveStockList()</code>, which initiates a <code>saveStockListVersionEvent</code>. The <code>fileName</code> and <code>ReadOnlyStockList</code> are saved as public final variables in the event.</p>
-</div>
-<div class="paragraph">
-<p>Step 3. The <code>handleSaveStockListVersionEvent</code> handler calls the <code>saveStockListVersion()</code> method from the <code>StorageManager</code> class.</p>
-</div>
-<div class="paragraph">
-<p>Step 4. The <code>ReadOnlyStockList</code> is saved as an xml file.</p>
-</div>
-<div class="paragraph">
-<p>Step 5. The user executes <code>open april_18</code> command to open the saved april_18.xml file.</p>
-</div>
-<div class="paragraph">
-<p>Step 6. The <code>open</code> command calls <code>Model#openStockList()</code>, which initiates a <code>openStockListVersionEvent</code>. The <code>fileName</code> is saved as a public final variable in the event.</p>
-</div>
-<div class="paragraph">
-<p>Step 7. The <code>handleOpenStockListVersionEvent</code> handler calls the <code>loadFileAsPage()</code> method from the <code>BrowserPanel</code> class.</p>
-</div>
-<div class="paragraph">
-<p>Step 8. The <code>loadFileAsPage()</code> method takes in the fileName and passes the directories of the <code>april_18.xml</code> and <code>template.xsl</code> files into <code>transformXml()</code> method.</p>
-</div>
-<div class="paragraph">
-<p>Step 9. The <code>april_18.xml</code> file is transformed with the <code>template.xsl</code> stylesheet into a table format and is displayed by the browser engine on the browser panel.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-save-executes"><a class="link" href="#aspect-how-save-executes">Aspect: How save executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1</strong> (current choice) Save as .xml file.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Able to display the inventory as a table by using XML transformation with XSLT. The .xml file can also be opened in Excel.</p>
-</li>
-<li>
-<p>Cons: -</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2</strong> Save as .csv file.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: File can be imported or exported.</p>
-</li>
-<li>
-<p>Cons: Unable to style the displayed table in the application.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-how-open-executes"><a class="link" href="#aspect-how-open-executes">Aspect: How open executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1</strong> (current choice) Transform .xml file into a table with a .xsl stylesheet.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Able to display the inventory in a table format for ease of view.</p>
-</li>
-<li>
-<p>Cons: A template.xsl file must be included in the application.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2</strong> Open the .xml file as it is</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Does not require transforming the .xml file with XSLT.</p>
-</li>
-<li>
-<p>Cons: The displayed inventory is in XML format and hard to decipher.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 13:40:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 13:44:27 UTC</div></div></div></body></html>
