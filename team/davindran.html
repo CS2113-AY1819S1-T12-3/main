@@ -442,8 +442,281 @@ Format: <code>logout</code></p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-login" class="discrete">Use case: Login</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list accounts</p>
+</li>
+<li>
+<p>StockList shows the list of accounts</p>
+</li>
+<li>
+<p>User requests to login using his account credentials</p>
+</li>
+<li>
+<p>StockList shows that the user has successfully logged in</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list does not contain user&#8217;s account.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given account credentials are invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. StockList shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-delete-account" class="discrete">Use case: Delete account</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list accounts</p>
+</li>
+<li>
+<p>StockList shows a list of accounts</p>
+</li>
+<li>
+<p>User requests to delete a specific account in the list</p>
+</li>
+<li>
+<p>StockList deletes the account</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. StockList shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-add-account" class="discrete">Use case: Add account</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add an account</p>
+</li>
+<li>
+<p>StockList adds the account to the database.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. The given account is already in the database.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. StockList shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-edit-account" class="discrete">Use case: Edit account</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list accounts</p>
+</li>
+<li>
+<p>StockList shows a list of accounts</p>
+</li>
+<li>
+<p>User requests to edit a specific account in the list</p>
+</li>
+<li>
+<p>StockList edits the account</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. StockList shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:18:14 UTC</div></div></div></body></html>
+<div class="sect2">
+<h3 id="logging-in"><a class="link" href="#logging-in">Logging in</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Logging in while all accounts are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all accounts using the <code>listAccounts</code> command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged out.</p>
+</li>
+<li>
+<p>Test case: <code>login u/admin p/lol</code><br>
+Expected: Account is not logged in. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>login u/admin p/admin</code><br>
+Expected: Account is logged in. Details of the logged in account shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Other incorrect login commands to try: <code>login</code>, <code>login u/x p/y</code> (where x and y differ from the registered account data)<br>
+Expected: Similar to the first test case.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="account-management"><a class="link" href="#account-management">Account management</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding an account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all accounts using the <code>listAccounts</code> command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged in as 'admin'.</p>
+</li>
+<li>
+<p>Test case: <code>addAccount u/admin p/lol</code><br>
+Expected: Account is not added. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>addAccount u/john p/doe</code><br>
+Expected: Account is added. Details of the added account shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Other incorrect addAccount commands to try: <code>addAccount</code>, <code>addAccount u/x p/y</code> (where x matches an account already in the database)<br>
+Expected: Similar to first test case.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Editing an account while all accounts are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all accounts using the <code>listAccounts</code> command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.</p>
+</li>
+<li>
+<p>Test case: <code>editAccount 2 u/john p/password123!</code><br>
+Expected: Account is edited. Details of the edited account shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>editAccount 0 u/chew p/lol</code><br>
+Expected: Account is not edited. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect editAccount commands to try: <code>editAccount</code>, <code>editAccount x u/y p/z</code> (where x is larger than the account list size)<br></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Deleting an account while all accounts are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all accounts using the <code>listAccounts</code> command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.</p>
+</li>
+<li>
+<p>Test case: <code>deleteAccount 2</code><br>
+Expected: Account is deleted. Details of the deleted account shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>deleteAccount 0</code><br>
+Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect deleteAccount commands to try: <code>deleteAccount</code>, <code>deleteAccount x</code> (where x is larger than the account list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:17:25 UTC</div></div></div></body></html>
