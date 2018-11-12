@@ -76,7 +76,13 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases:</a></li>
+<li><a href="#use-cases">Appendix D: Use Cases:</a>
+<ul class="sectlevel2">
+<li><a href="#logging-in">D.1. Logging in</a></li>
+<li><a href="#account-management">D.2. Account management</a></li>
+<li><a href="#saving-data">D.3. Saving data</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2750,6 +2756,12 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Account for the state of items in the lab</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lab Technician</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Report all the lost items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record the lost status for all the items and check the lost list whenever I want</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lab Technician</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Withdraw my operation sometime</p></td>
@@ -3592,11 +3604,73 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p>=== Lost an item</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Lost an item while all items are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all items using the <code>list</code> command. Multiple items in the list.</p>
+</li>
+<li>
+<p>Test case: <code>lost 1 q/15</code><br>
+Expected: First item is decreased by 15 from the list. Details of the lost item shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>lost 0 q/15</code><br>
+Expected: No item is lost. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect lost commands to try: <code>lost 1 q/x</code> (where x is larger than the Ready quantity of the first item) <br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>=== Logging in</p>
+<p>=== Found a lost item</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Found a lost item while all items are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all lost items using the <code>lost&amp;found</code> command. Multiple items in the list.</p>
+</li>
+<li>
+<p>Prerequisites: List all items using the <code>list</code> command. Multiple items in the list.</p>
+</li>
+<li>
+<p>Test case: <code>found 1 q/15</code><br>
+Expected: First item is increased by 15 from the list. The corresponding lost quantity of this item will be decreased. Details of the found item shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>found 0 q/15</code><br>
+Expected: No item is lost. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect found commands to try: <code>found 1 q/x</code> (where x is larger than the lost quantity of the first item) <br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="logging-in"><a class="link" href="#logging-in">D.1. Logging in</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3623,9 +3697,9 @@ Expected: Similar to the first test case.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>=== Account management</p>
 </div>
+<div class="sect2">
+<h3 id="account-management"><a class="link" href="#account-management">D.2. Account management</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3695,9 +3769,9 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>=== Saving data</p>
 </div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">D.3. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3717,5 +3791,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:17:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:53:08 UTC</div></div></div></body></html>
