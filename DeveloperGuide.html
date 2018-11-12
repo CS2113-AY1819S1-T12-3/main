@@ -78,15 +78,12 @@
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
 <li><a href="#use-cases">Appendix D: Use Cases:</a></li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix F: Glossary</a></li>
-<li><a href="#product-survey">Appendix G: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-item">H.2. Deleting a item</a></li>
-<li><a href="#logging-in">H.3. Logging in</a></li>
-<li><a href="#account-management">H.4. Account management</a></li>
-<li><a href="#saving-data">H.5. Saving data</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-item">F.2. Deleting a item</a></li>
+<li><a href="#logging-in">F.3. Logging in</a></li>
+<li><a href="#account-management">F.4. Account management</a></li>
 </ul>
 </li>
 </ul>
@@ -2631,7 +2628,7 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage stocks faster than a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>: manage stocks faster than a the current method, which is by physical stock taking, or using a spreadsheet.</p>
 </div>
 </div>
 </div>
@@ -2674,6 +2671,12 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lab Technician</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update the quantity of an item in the list</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Record the quantity change of the item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lab Technician</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update the status of an item in the list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record the change in status of the item</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2746,7 +2749,7 @@ for <code>RemarkCommandParser</code>.</p>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases:</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is <code>JalilEnterprises</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is <code>StockList</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-delete-item" class="discrete">Use case: Delete item</h3>
 <div class="paragraph">
@@ -3199,6 +3202,143 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-list-items-by-status" class="discrete">Use case: List items by status</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list items according to status</p>
+</li>
+<li>
+<p>StockList lists out the item according to the status</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-change-status" class="discrete">Use case: Change Status</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list all items</p>
+</li>
+<li>
+<p>StockList shows a list the list of all items</p>
+</li>
+<li>
+<p>User requests to change the status of an item.</p>
+</li>
+<li>
+<p>StockList changes the status of the item.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. Any of the inputs are invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. StockList shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-creating-loan-list-entry" class="discrete">Use case: Creating loan list entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests create a loan list entry</p>
+</li>
+<li>
+<p>StockList creates the loan list entry</p>
+</li>
+<li>
+<p>User requests to view the loan list</p>
+</li>
+<li>
+<p>StockList shows the updated loan list</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. Any of the inputs are invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. StockList shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-deleting-loan-list-entry" class="discrete">Use case: Deleting loan list entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests delete a loan list entry</p>
+</li>
+<li>
+<p>StockList deletes the loan list entry</p>
+</li>
+<li>
+<p>User requests to view the loan list</p>
+</li>
+<li>
+<p>StockList shows the updated loan list</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. Any of the inputs are invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. StockList shows an error message.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3217,67 +3357,10 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix F: Glossary</a></h2>
-<div class="sectionbody">
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
-<dd>
-<p>Windows, Linux, Unix, OS-X</p>
-</dd>
-<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
-<dd>
-<p>A contact detail that is not meant to be shared with others</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix G: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -3295,7 +3378,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3328,12 +3411,9 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-item"><a class="link" href="#deleting-a-item">H.2. Deleting a item</a></h3>
+<h3 id="deleting-a-item"><a class="link" href="#deleting-a-item">F.2. Deleting a item</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3360,12 +3440,9 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="logging-in"><a class="link" href="#logging-in">H.3. Logging in</a></h3>
+<h3 id="logging-in"><a class="link" href="#logging-in">F.3. Logging in</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3394,7 +3471,7 @@ Expected: Similar to the first test case.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="account-management"><a class="link" href="#account-management">H.4. Account management</a></h3>
+<h3 id="account-management"><a class="link" href="#account-management">F.4. Account management</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3465,25 +3542,5 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.5. Saving data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-</li>
-</ol>
 </div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:25:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:32:19 UTC</div></div></div></body></html>
