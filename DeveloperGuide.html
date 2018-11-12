@@ -1135,54 +1135,71 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 <div class="ulist">
 <ul>
 <li>
-<p><code>LoginCommand#execute()</code>&#8201;&#8212;&#8201;checks if the username and password match the predefined account details. Displays a login success message if match and displays a failure message otherwise.</p>
+<p><code>LoginCommand#modifyLoginStatus()</code>&#8201;&#8212;&#8201;checks if the password matches the account in the database, if it exists. If true, updates the logged in account status in <code>Model</code> accordingly.</p>
+</li>
+<li>
+<p><code>LoginCommand#execute()</code>&#8201;&#8212;&#8201;calls <code>LoginCommand#modifyLoginStatus()</code>. Then, checks login status in <code>Model</code> and displays a login success message if true and displays a failure message otherwise.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#setLoggedInUser()</code> and <code>Model#getLoginStatus()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user executes <code>login u/admin p/password</code> command to log into StockList with 'admin' and 'password' being the username and password credentials respectively.</p>
+<p>Step 1. The user executes <code>login u/admin p/admin</code> command to log into StockList with <strong>admin</strong> and <strong>admin</strong> being the username and password credentials respectively.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The <code>execute</code> command calls <code>Account#getUsername()</code> and <code>Account#getPassword()</code> methods, which parses the user input and stores the credentials as <code>username</code> and <code>password</code> variables.</p>
+<p>Step 2. The <code>execute</code> command calls <code>Model#getLoginStatus()</code> and checks if the user is already logged in. If true, <code>execute</code> throws a <code>CommandException</code> notifying the user that he is already logged in.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The <code>execute</code> command then checks if the username and password strings match the predefined username and password strings.</p>
+<p>Step 3. The <code>execute</code> command then calls <code>LoginCommand#modifyLoginStatus()</code>, which checks if the username <strong>admin</strong> exists in the account list, and if it does, checks if the given password <strong>admin</strong> matches the password associated with the username <strong>admin</strong>.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. If the username and password strings match, a success message is printed; otherwise a failure message is printed.</p>
+<p>Step 4. If the <strong>admin</strong> password matches, <code>LoginCommand#modifyLoginStatus()</code> calls <code>Model#setLoggedInUser()</code> which updates the logged in account status in <code>model</code> with the logged in account set to <strong>admin</strong> and logged in status set to true.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. The <code>execute</code> command then checks the log in status via <code>Model#getLoginStatus()</code>. A success message is printed if true; otherwise a failure message is printed.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the login operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LoginSequenceDiagram.png" alt="LoginSequenceDiagram" width="800">
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-execute-executes"><a class="link" href="#aspect-how-execute-executes">Aspect: How 'execute' executes</a></h5>
+<h5 id="aspect-how-login-executes"><a class="link" href="#aspect-how-login-executes">Aspect: How login executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong> (current choice) Check if the username and passwords match the predefined strings.</p>
+<p><strong>Alternative 1</strong> (current choice) Check against various accounts stored in a file and allow access if match.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Very simple, minimal memory usage, allows for only one access account.</p>
+<p>Pros: Allows for multiple accounts with access to StockList.</p>
 </li>
 <li>
-<p>Cons: Does not allow access for multiple accounts.</p>
+<p>Cons: More memory usage.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2</strong> Save multiple account credentials in a file, check against the file.</p>
+<p><strong>Alternative 2</strong> Checks against a single account that can be modified.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Allows for multiple accounts with different levels of access to StockList.</p>
+<p>Pros: Simple to implement, minimal memory usage, allows for only one access account.</p>
 </li>
 <li>
-<p>Cons: More memory usage</p>
+<p>Cons: Does not allow access for multiple accounts, locked out of app if credentials lost.</p>
 </li>
 </ul>
 </div>
@@ -3543,4 +3560,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:46:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:29:16 UTC</div></div></div></body></html>
