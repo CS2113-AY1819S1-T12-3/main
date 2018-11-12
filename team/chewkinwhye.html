@@ -385,6 +385,62 @@ The first entry as shown on the viewLoanList command will be deleted. The status
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-statuscommand-executes"><a class="link" href="#aspect-how-statuscommand-executes">Aspect: How StatusCommand executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Storing the items as an Item instead of SimpleItem.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as I would not have to create a new class.</p>
+</li>
+<li>
+<p>Cons: This slows down the code, and it contains redundant information that is not required.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Iterate through the item list 3 times, one for each Status field.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: We would not have to create 3 ArrayList to store the items as they can be printed out immediately.</p>
+</li>
+<li>
+<p>Cons: This slows down the code significantly, and makes the code longer.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 15:14:39 UTC</div></div></div></body></html>
+<div class="sect4">
+<h5 id="aspect-how-changestatuscommand-executes"><a class="link" href="#aspect-how-changestatuscommand-executes">Aspect: How ChangeStatusCommand executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Not creating a ChangeStatusDescriptor class to store the user inputs</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as I would not have to create a new class.</p>
+</li>
+<li>
+<p>Cons: This would make the code extremely messy as there would be multiple parameters to handle.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:30:08 UTC</div></div></div></body></html>

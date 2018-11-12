@@ -1071,6 +1071,62 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-statuscommand-executes"><a class="link" href="#aspect-how-statuscommand-executes">Aspect: How StatusCommand executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Storing the items as an Item instead of SimpleItem.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as I would not have to create a new class.</p>
+</li>
+<li>
+<p>Cons: This slows down the code, and it contains redundant information that is not required.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Iterate through the item list 3 times, one for each Status field.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: We would not have to create 3 ArrayList to store the items as they can be printed out immediately.</p>
+</li>
+<li>
+<p>Cons: This slows down the code significantly, and makes the code longer.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-changestatuscommand-executes"><a class="link" href="#aspect-how-changestatuscommand-executes">Aspect: How ChangeStatusCommand executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Not creating a ChangeStatusDescriptor class to store the user inputs</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as I would not have to create a new class.</p>
+</li>
+<li>
+<p>Cons: This would make the code extremely messy as there would be multiple parameters to handle.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="login-feature"><a class="link" href="#login-feature">3.4. Login feature</a></h3>
@@ -1103,7 +1159,7 @@ If the <code>currentStatePointer</code> is at index <code>stockListStateList.siz
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-execute-executes"><a class="link" href="#aspect-how-execute-executes">Aspect: How 'execute' executes</a></h5>
 <div class="ulist">
@@ -1165,7 +1221,7 @@ It extends <code>Command</code> and implements the following operation:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-tagcommand-executes"><a class="link" href="#aspect-how-tagcommand-executes">Aspect: How tagCommand executes</a></h5>
 <div class="ulist">
@@ -1242,7 +1298,7 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1360,7 +1416,7 @@ They extend <code>Command</code> and implement the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-lost-and-found-executes"><a class="link" href="#aspect-how-lost-and-found-executes">Aspect: How Lost and Found executes</a></h5>
 <div class="ulist">
@@ -3179,7 +3235,7 @@ Expected: Account is not added. Error details shown in the status message. Statu
 Expected: Account is added. Details of the added account shown in the status message. Timestamp in the status bar is updated.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>addAccount</code>, <code>addAccount u/x p/y</code> (where x matches an account already in the database)<br>
+<p>Other incorrect addAccount commands to try: <code>addAccount</code>, <code>addAccount u/x p/y</code> (where x matches an account already in the database)<br>
 Expected: Similar to first test case.</p>
 </li>
 </ol>
@@ -3201,7 +3257,7 @@ Expected: Account is edited. Details of the edited account shown in the status m
 Expected: Account is not edited. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect edit commands to try: <code>editAccount</code>, <code>editAccount x u/y p/z</code> (where x is larger than the account list size)<br></p>
+<p>Other incorrect editAccount commands to try: <code>editAccount</code>, <code>editAccount x u/y p/z</code> (where x is larger than the account list size)<br></p>
 </li>
 </ol>
 </div>
@@ -3222,7 +3278,7 @@ Expected: Account is deleted. Details of the deleted account shown in the status
 Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect edit commands to try: <code>deleteAccount</code>, <code>deleteAccount x</code> (where x is larger than the account list size)<br>
+<p>Other incorrect deleteAccount commands to try: <code>deleteAccount</code>, <code>deleteAccount x</code> (where x is larger than the account list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -3252,4 +3308,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 15:14:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:30:08 UTC</div></div></div></body></html>
